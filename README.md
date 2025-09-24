@@ -7,6 +7,7 @@ This repository contains two minimal, well-tested implementations for multi-term
 
 The goal is to show simple, clear baselines for conjunctive (multi-term) search and highlight trade-offs between straightforward posting-list intersections and compact bitmask-based filtering.
 
+## Article
 For background and motivation, see the article:
 - [From Inverted Index to Conjunctive Inverted Index: Optimizing Multi-Term Queries](https://cake-vinca-a89.notion.site/From-Inverted-Index-to-Conjunctive-Inverted-Index-Optimizing-Multi-Term-Queries-278cf1b2daf080768ac2eb6803d3a39c)
 

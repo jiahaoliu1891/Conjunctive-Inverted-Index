@@ -35,16 +35,3 @@ Relevant tests:
 - `tests/test_inverted_index.py`
 - `tests/test_conjunctive_index_binary.py`
 
-
-## Project layout
-
-```
-src/
-  inverted_index.py              # set-based postings and intersections
-  conjunctive_index_binary.py    # bitmask-based conjunctive matching
-tests/
-  test_inverted_index.py
-  test_conjunctive_index_binary.py
-benchmark/
-  generate_data.py               # placeholder for dataset generation (WIP)
-```

@@ -1,5 +1,7 @@
 from collections import defaultdict
 from typing import List, Set
+import json
+import os
 
 
 class ConjunctiveIndexBinary:
@@ -43,4 +45,37 @@ class ConjunctiveIndexBinary:
             if (query_bits & key_bits) == query_bits:
                 result.update(doc_ids)
         return result
+    
+    def save(self, output_directory: str) -> None:
+        """Persist the index and metadata to the given directory.
+
+        Files written:
+        - conjunctive_index_binary.jsonl: one line per bit-key entry with doc_ids
+        - conjunctive_index_meta.json: metadata including term_to_bit mapping
+        """
+        os.makedirs(output_directory, exist_ok=True)
+
+        index_path = os.path.join(output_directory, "conjunctive_index_binary.jsonl")
+        meta_path = os.path.join(output_directory, "conjunctive_index_meta.json")
+
+        # Write index as JSONL for stream-friendly storage
+        with open(index_path, "w", encoding="utf-8") as f:
+            for key_bits, doc_ids in self.index.items():
+                record = {
+                    "key_bits": int(key_bits),
+                    "doc_ids": sorted(doc_ids),
+                }
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+        # Write metadata containing the vocabulary bit assignments
+        with open(meta_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "total_terms": self.total_terms,
+                    "term_to_bit": self.term_to_bit,
+                },
+                f,
+                indent=2,
+                ensure_ascii=False,
+            )
     

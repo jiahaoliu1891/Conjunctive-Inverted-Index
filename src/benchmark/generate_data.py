@@ -8,6 +8,8 @@ from typing import Dict, Iterable, List, Sequence, Tuple
 from tqdm import tqdm
 import logging
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -163,7 +165,7 @@ def parse_args(argv: Sequence[str] = None) -> GenerationConfig:
     parser.add_argument(
         "--output-dir",
         type=str,
-        default=os.path.join("benchmark", "data"),
+        default=os.path.join(SCRIPT_DIR, "data"),
         help="Output directory for generated files",
     )
     parser.add_argument(
